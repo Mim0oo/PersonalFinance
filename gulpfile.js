@@ -17,3 +17,8 @@ elixir(mix => {
     mix.sass('app.scss')
        .webpack('app.js');
 });
+
+
+elixir(function(mix) {
+    mix.sass('font-awesome.scss');
+});

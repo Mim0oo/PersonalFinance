@@ -8,10 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Viziongames') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -43,7 +44,13 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+                    <li><a href="javascript:void();" class="dropdown-toggle" data-toggle="dropdown">Income</a>
+                    <ul class="dropdown-menu" style="font-size: 14px;">
+                    <li><a href="{{ url('/income/create') }}">Add new income</a></li>
+                    <li><a href="{{ url('/income') }}">View total income</a></li>
+                    <li><a href="{{ url('/source') }}">View or Add sources</a></li>
+                    </ul>
+                    </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -77,7 +84,13 @@
                 </div>
             </div>
         </nav>
+        @if (session()->has('flash_notification.message'))
+    <div class="alert alert-{{ session('flash_notification.level') }}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
+        {!! session('flash_notification.message') !!}
+    </div>
+@endif
         @yield('content')
     </div>
 
