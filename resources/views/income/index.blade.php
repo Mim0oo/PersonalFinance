@@ -4,6 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
+        <div class="panel-group">
             <div class="panel panel-default">
             <a class="btn btn-primary pull-right" style="margin-right:30px;margin-top:25px;" href="/income/create" role="button">Add income</a>
                 <div class="panel-heading"><h3>Income grid</h3></div>
@@ -11,8 +12,8 @@
                 <div class="panel-body">
                   <table class="table table-striped">
                   <tr>
-                  <th>Month</th>
                   <th>Year</th>
+                  <th>Month</th>              
                   <th>Ammount</th>
                   <th>Source</th>
                   <th>Comment</th>
@@ -23,9 +24,9 @@
                   </tr>
                     @foreach($incomes as $income)
                     <tr @if($income->paid == 0) class="danger" @endif>
-                    <td>{{date("F", mktime(0, 0, 0, $income->month, 15))}}</td>
                     <td>{{$income->year}}</td>
-                    <td>{{$income->ammount}}</td>
+                    <td>{{date("F", mktime(0, 0, 0, $income->month, 15))}}</td>
+                    <td style="font-weight: bold;">{{$income->ammount}}</td>
                     <td>{{$income->sources->first()->name}}</td>
                     <td>{{str_limit($income->comment, $limit = 30, $end = '...')}}</td>
                     <td>@if($income->paid == 0) No @else Yes @endif</td>
@@ -47,15 +48,14 @@
                 <div class="pagination" style="margin:0px;"> {{ $incomes->links() }} </div>
                 </div>
 
-            </div>
-        </div>
-    <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3>Group Statistics</h3></div>
+            </div></div></div>
+    
+
+
+<div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Monthly Statistics</h4></div>
                 <div class="panel-body">
-                <h3>All time: {{$inc_alltime[0]->ammount}}</h3>
-                <br/>
-                  <h4>Monthly</h4>
                   <table class="table table-striped">
                   <tr>
                   <th>Year</th>
@@ -69,16 +69,18 @@
                     <tr>
                     <td>{{$monthly->year}}</td>
                     <td>{{date("F", mktime(0, 0, 0, $monthly->month, 15))}}</td>
-                    <td>{{$monthly->ammount}}</td>
+                    <td style="font-weight: bold;">{{$monthly->ammount}}</td>
                     </tr>
                     @endforeach
                     
                   </table>
                 <div class="pagination" style="margin:0px;"> {{ $inc_monthly->links() }} </div>
-                </div>
+                </div> </div> </div></div>
 
+<div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Yearly Statistics - Total: {{$inc_alltime[0]->ammount}}</h4></div>
                 <div class="panel-body">
-                <h4>Yearly</h4>
                 <table class="table table-striped">
                   <tr>
                   <th>Year</th>
@@ -90,7 +92,28 @@
                     @foreach($inc_yearly as $yearly)
                     <tr>
                     <td>{{$yearly->year}}</td>
-                    <td>{{$yearly->ammount}}</td>
+                    <td style="font-weight: bold;">{{$yearly->ammount}}</td>
+                    </tr>
+                    @endforeach
+                  </table>
+                </div></div></div>
+
+<div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Source Statistics</h4></div>
+                <div class="panel-body">
+                <table class="table table-striped">
+                  <tr>
+                  <th>Source</th>
+                  <th>Ammount</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  </tr>
+                    @foreach($inc_bysource as $source)
+                    <tr>
+                    <td>{{$sources->where('id', $source->source_id)->first()->name}}</td>
+                    <td style="font-weight: bold;">{{$source->ammount}}</td>
                     </tr>
                     @endforeach
                   </table>
@@ -98,8 +121,4 @@
             </div>
             
             </div>
-        </div>
-    </div>
-</div>
-</div>
 @endsection
