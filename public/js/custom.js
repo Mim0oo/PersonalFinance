@@ -1,0 +1,1 @@
+function confirmDelete(){var e=confirm("Are you sure you want to delete?");return!!e}
