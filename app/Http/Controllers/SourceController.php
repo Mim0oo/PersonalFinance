@@ -93,8 +93,13 @@ class SourceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        # Destroy the requested row
+        source::destroy($id);
+
+        # Display message for successfull database save
+        flash('You have successfully deleted source ('.$id.')!', 'success');
+
     }
 }

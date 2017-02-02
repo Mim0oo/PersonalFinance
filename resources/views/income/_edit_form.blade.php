@@ -5,19 +5,19 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Add new income</div>
+                <div class="panel-heading">Edit income</div>
 
                 <div class="panel-body">
 
-                    {!! Form::open(['action' => 'IncomeController@store']) !!}
+                    {{ Form::model($income, array('route' => array('income.update', $income->id), 'method' => 'put')) }}
 
                     <div class="form-group">
                   {!! Form::Label('label-year', 'Year') !!}
-                  {!! Form::selectYear('year', '2009', $year, $year, ['class' => 'form-control']) !!}
+                  {!! Form::selectYear('year', '2009', $year, $income->year, ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                       {!! Form::Label('label-month', 'Month') !!}
-                      {!! Form::selectMonth('month', $month, ['class' => 'form-control']) !!}
+                      {!! Form::selectMonth('month', $income->month, ['class' => 'form-control']) !!}
                         </div>
 
             <div class="form-group">
@@ -31,7 +31,7 @@
                   {!! Form::Label('label-source', 'Source') !!}
                   <select class="form-control" name="source" placeholder="Source*">
                     @foreach($sources as $source)
-                    <option value="{{$source->id}}">{{$source->name}}</option>
+                    <option value="{{$source->id}}"@if($source->id == $income->source_id) selected @endif>{{$source->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -55,7 +55,7 @@
                 {!! Form::submit('Submit',array('required', 
                 'class'=>'btn btn-primary pull-right')) !!}
             </div>
-
+            
             {!! Form::close() !!}
         </div>
     </div>
