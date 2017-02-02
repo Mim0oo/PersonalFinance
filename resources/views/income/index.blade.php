@@ -53,6 +53,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><h3>Group Statistics</h3></div>
                 <div class="panel-body">
+                <h3>All time: {{$inc_alltime[0]->ammount}}</h3>
+                <br/>
                   <h4>Monthly</h4>
                   <table class="table table-striped">
                   <tr>

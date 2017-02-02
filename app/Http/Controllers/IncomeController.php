@@ -18,6 +18,7 @@ class IncomeController extends Controller
     public function index()
     {	
     	$incomes = income::orderBy('year', 'DESC')->orderBy('month', 'DESC')->paginate(15);
+        
         $inc_monthly = DB::table('income')
                      ->select(DB::raw('year'), DB::raw('month'), DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)
@@ -31,9 +32,13 @@ class IncomeController extends Controller
                      ->where('paid', 1)
                      ->groupBy('year')
                      ->orderBy('year', 'DESC')
-                     ->paginate(15);  
+                     ->paginate(15);
 
-    	return \View::make('income.index', compact('incomes','inc_monthly', 'inc_yearly'
+        $inc_alltime = DB::table('income')
+                     ->select(DB::raw('sum(ammount) as ammount'))
+                     ->where('paid', 1)->get();
+
+    	return \View::make('income.index', compact('incomes','inc_monthly', 'inc_yearly', 'inc_alltime'
 
             )); 
     }
