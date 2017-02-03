@@ -121,4 +121,43 @@
             </div>
             
             </div>
+
+            <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Monthly chart</h4></div>
+                <div class="panel-body">
+                  <canvas id="myChart" width="400" height="270"></canvas>
+                  <script>
+                    var ctx = document.getElementById("myChart");
+                    var myChart = new Chart(ctx, {
+                      type: 'line',
+                      data: {
+                        labels: <?php echo html_entity_decode(json_encode($months), ENT_QUOTES, 'UTF-8'); ?>,
+                        datasets: [{
+                          label: 'Statistics by month',
+                          data: <?php echo html_entity_decode(json_encode($ammounts), ENT_QUOTES, 'UTF-8'); ?>,
+                          backgroundColor:
+                          'rgba(54, 162, 235, 0.2)',
+
+                          borderColor:
+                          'rgba(54, 162, 235, 1)',
+
+                          borderWidth: 1
+                        }]
+                      },
+                      options: {
+                        scales: {
+                          yAxes: [{
+                            ticks: {
+                              beginAtZero:true
+                            }
+                          }]
+                        }
+                      }
+                    });
+                  </script>
+                </div>
+            </div>
+            
+            </div>
 @endsection

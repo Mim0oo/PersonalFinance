@@ -15,6 +15,9 @@
     <link href="/css/font-awesome.css" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -92,10 +95,6 @@
     </div>
 @endif
         @yield('content')
-    </div>
-
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
-    <script src="/js/custom.js"></script>
+    </div> 
 </body>
 </html>

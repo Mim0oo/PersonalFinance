@@ -18,7 +18,7 @@ class IncomeController extends Controller
     public function index()
     {	
     	$incomes = income::orderBy('year', 'DESC')->orderBy('month', 'DESC')->paginate(5);
-        $sources = source::all();
+        $sources = source::all(); // Need all sources for group statistics by source
         
         $inc_monthly = DB::table('income')
                      ->select(DB::raw('year'), DB::raw('month'), DB::raw('sum(ammount) as ammount'))
@@ -28,6 +28,27 @@ class IncomeController extends Controller
                      ->orderBy('month', 'DESC')
                      ->paginate(6);
 
+        # Retrieving values for the monthly line chart
+        $chart_monthly = DB::table('income')
+
+                     ->select(DB::raw('year'), DB::raw('month'), DB::raw('sum(ammount) as ammount'))
+                     ->where('paid', 1)
+                     ->orderBy('year')
+                     ->orderBy('month')
+                     ->groupBy('year','month')
+                     ->skip(29)
+                     ->take(25)
+                     ->get();
+
+
+        # Generating label array for the monthly line chart
+        $chart_monthlylabel = [];
+        foreach ($chart_monthly as $key => $value) {
+            $item = $value->month . '/' . $value->year;
+            array_push($chart_monthlylabel, $item);
+        }
+
+           
         $inc_yearly = DB::table('income')
                      ->select(DB::raw('year'), DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)
@@ -48,7 +69,8 @@ class IncomeController extends Controller
 
     	return \View::make('income.index', compact('incomes', 'sources', 'inc_monthly', 'inc_yearly', 'inc_alltime', 'inc_bysource'
 
-            )); 
+            ))->with('months', $chart_monthlylabel)
+                   ->with('ammounts', $chart_monthly->pluck('ammount'));
     }
 
     /**
