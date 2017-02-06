@@ -76,8 +76,52 @@
                   </table>
                 <div class="pagination" style="margin:0px;"> {{ $inc_monthly->links() }} </div>
                 </div> </div> </div></div>
+<div class="col-md-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Foreign Exchange BGN</h4></div>
+                <div class="panel-body">
+                <table class="table table-striped">
+                  <tr>
+                  <th>Currency</th>
+                  <th>Rate</th>
+                  </tr>
+                    <tr>
+                    <td>{{$currenciesbg[8]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[8]->RATE}}</td>
+                    </tr>
+                    <tr>
+                    <td>{{$currenciesbg[4]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[4]->RATE}}</td>
+                    </tr>
+                    <tr>
+                    <td>{{$currenciesbg[29]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[29]->RATE}}</td>
+                    </tr>
+                    <tr>
+                    <td>{{$currenciesbg[3]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[3]->RATE}}</td>
+                    </tr>
+                    <tr>
+                    <td>{{$currenciesbg[24]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[24]->RATE}}</td>
+                    </tr>
+                    <tr>
+                    <td>{{$currenciesbg[1]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[24]->RATE}}</td>
+                    </tr>
+                    <tr>
+                    <td>{{$currenciesbg[2]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[24]->RATE}}</td>
+                    </tr>
+                    <tr>
+                    <td>{{$currenciesbg[5]->CODE}}</td>
+                    <td style="font-weight: bold;">{{$currenciesbg[24]->RATE}}</td>
+                    </tr>
+                  </table>
+                </div></div></div>
 
-<div class="col-md-4">
+
+<div class="col-md-2">
             <div class="panel panel-primary">
                 <div class="panel-heading"><h4>Yearly Statistics - Total: {{$inc_alltime[0]->ammount}}</h4></div>
                 <div class="panel-body">
@@ -85,9 +129,6 @@
                   <tr>
                   <th>Year</th>
                   <th>Ammount</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
                   </tr>
                     @foreach($inc_yearly as $yearly)
                     <tr>
@@ -121,6 +162,27 @@
             </div>
             
             </div>
+
+                <!--
+            <div class="col-md-2">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Foreign Exchange Rates</h4></div>
+                <div class="panel-body">
+                <table class="table table-striped">
+                  <tr>
+                  <th>Currency</th>
+                  <th>Rate</th>
+                  </tr>
+                    @foreach($currencies as $currency)
+                    <?php if (in_array($currency['currency'], ['BGN', 'USD', 'GBP', 'CAD', 'JPY', 'CHF', 'RUB', 'AUD'])) { ?>
+                    <tr>
+                    <td>{{$currency['currency']}}</td>
+                    <td style="font-weight: bold;">{{$currency['rate']}}</td>
+                    </tr>
+                    <?php }?>
+                    @endforeach
+                  </table>
+                </div></div></div>-->
 
             <div class="col-md-4">
             <div class="panel panel-primary">

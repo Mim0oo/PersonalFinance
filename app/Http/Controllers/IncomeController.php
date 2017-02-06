@@ -48,6 +48,25 @@ class IncomeController extends Controller
             array_push($chart_monthlylabel, $item);
         }
 
+        # Test xml parsing for foreign currency
+        $xml = \XmlParser::load('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
+        $currencies = $xml->getContent()->Cube->Cube->Cube;
+        /*
+        foreach($currencies as $currency) {
+            $item->title = $product['title'];
+            $item->save();
+        }
+        */
+
+        # Test xml parsing for foreign currency BGN
+        $xml2 = \XmlParser::load('http://bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=xml&search=&lang=BG');
+        $currenciesbg = $xml2->getContent()->ROW;
+        /*
+        foreach($currencies as $currency) {
+            $item->title = $product['title'];
+            $item->save();
+        }
+        */
            
         $inc_yearly = DB::table('income')
                      ->select(DB::raw('year'), DB::raw('sum(ammount) as ammount'))
@@ -67,7 +86,13 @@ class IncomeController extends Controller
                      ->select(DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)->get();
 
-    	return \View::make('income.index', compact('incomes', 'sources', 'inc_monthly', 'inc_yearly', 'inc_alltime', 'inc_bysource'
+    	return \View::make('income.index', compact('incomes', 'sources', 
+            'inc_monthly', 
+            'inc_yearly', 
+            'inc_alltime', 
+            'inc_bysource',
+            'currencies',
+            'currenciesbg'
 
             ))->with('months', $chart_monthlylabel)
                    ->with('ammounts', $chart_monthly->pluck('ammount'));
