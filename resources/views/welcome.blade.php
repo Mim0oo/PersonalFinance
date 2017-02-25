@@ -75,15 +75,19 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Personal finance
+                    <p style="font-size:43px;">
+                    version 1.0
+                    </p>
                 </div>
+                
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="/home">Home</a>
+                    <a href="/income">Income View/Add</a>
+                    <a href="/source">Sources View/Add</a>
+                    <a title="View project at Github" href="https://github.com/Mim0oo/personal_finance">GitHub</a>
+                    <a href="/about">About PF</a>
                 </div>
             </div>
         </div>
