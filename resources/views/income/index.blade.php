@@ -197,7 +197,7 @@
                         labels: <?php echo html_entity_decode(json_encode($months), ENT_QUOTES, 'UTF-8'); ?>,
                         datasets: [{
                           label: 'Statistics by month',
-                          data: <?php echo html_entity_decode(json_encode($ammounts), ENT_QUOTES, 'UTF-8'); ?>,
+                          data: <?php echo html_entity_decode(json_encode(array_reverse($ammounts)), ENT_QUOTES, 'UTF-8'); ?>,
                           backgroundColor:
                           'rgba(54, 162, 235, 0.2)',
 

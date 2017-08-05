@@ -16,12 +16,17 @@ class IncomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {	
-    	$incomes = income::orderBy('year', 'DESC')->orderBy('month', 'DESC')->paginate(5);
-        $sources = source::all(); // Need all sources for group statistics by source
-        
+    {
+    	$incomes = income::orderBy('year', 'DESC')
+            ->orderBy('month', 'DESC')->paginate(5);
+
+        // Need all sources for group statistics by source
+        $sources = source::all(); 
+
         $inc_monthly = DB::table('income')
-                     ->select(DB::raw('year'), DB::raw('month'), DB::raw('sum(ammount) as ammount'))
+                     ->select(DB::raw('year'),
+                        DB::raw('month'),
+                        DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)
                      ->groupBy('year','month')
                      ->orderBy('year', 'DESC')
@@ -30,16 +35,15 @@ class IncomeController extends Controller
 
         # Retrieving values for the monthly line chart
         $chart_monthly = DB::table('income')
-
-                     ->select(DB::raw('year'), DB::raw('month'), DB::raw('sum(ammount) as ammount'))
+                     ->select(DB::raw('year'),
+                        DB::raw('month'),
+                        DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)
-                     ->orderBy('year')
-                     ->orderBy('month')
+                     ->orderBy('year', 'desc')
+                     ->orderBy('month', 'desc')
                      ->groupBy('year','month')
-                     ->skip(29)
-                     ->take(25)
+                     ->take(24)
                      ->get();
-
 
         # Generating label array for the monthly line chart
         $chart_monthlylabel = [];
@@ -47,6 +51,9 @@ class IncomeController extends Controller
             $item = $value->month . '/' . $value->year;
             array_push($chart_monthlylabel, $item);
         }
+
+        # Chart labels are generated in reverse order
+        $chart_monthlylabel = array_reverse($chart_monthlylabel);
 
         # Test xml parsing for foreign currency
         $xml = \XmlParser::load('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
@@ -67,16 +74,18 @@ class IncomeController extends Controller
             $item->save();
         }
         */
-           
+
         $inc_yearly = DB::table('income')
-                     ->select(DB::raw('year'), DB::raw('sum(ammount) as ammount'))
+                     ->select(DB::raw('year'),
+                        DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)
                      ->groupBy('year')
                      ->orderBy('year', 'DESC')
                      ->get();
 
         $inc_bysource = DB::table('income')
-                     ->select(DB::raw('source_id'), DB::raw('sum(ammount) as ammount'))
+                     ->select(DB::raw('source_id'), 
+                        DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)
                      ->groupBy('source_id')
                      ->orderBy('ammount', 'DESC')
@@ -86,16 +95,18 @@ class IncomeController extends Controller
                      ->select(DB::raw('sum(ammount) as ammount'))
                      ->where('paid', 1)->get();
 
-    	return \View::make('income.index', compact('incomes', 'sources', 
+    	return \View::make('income.index', compact(
+            'incomes',
+            'sources', 
             'inc_monthly', 
             'inc_yearly', 
             'inc_alltime', 
             'inc_bysource',
             'currencies',
-            'currenciesbg'
-
-            ))->with('months', $chart_monthlylabel)
-                   ->with('ammounts', $chart_monthly->pluck('ammount'));
+            'currenciesbg'))
+                ->with('months', $chart_monthlylabel)
+                ->with('ammounts', $chart_monthly
+                    ->pluck('ammount')->toArray());
     }
 
     /**
@@ -105,10 +116,12 @@ class IncomeController extends Controller
      */
     public function index2()
     {   
-        $incomes = income::orderBy('year', 'DESC')->orderBy('month', 'DESC')->paginate(15);
-        return \View::make('income.index', compact('incomes'
-
-            )); 
+        $incomes = income::orderBy('year', 'DESC')
+            ->orderBy('month', 'DESC')->paginate(15);
+        return \View::make(
+            'income.index',
+            compact('incomes')
+        ); 
     }
 
     /**
@@ -215,7 +228,6 @@ class IncomeController extends Controller
     public function store(Request $request)
     {
     	# Validate the request...
-
         $income = new income;
 		$income->month = $request->month;
 		$income->year = $request->year;
