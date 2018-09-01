@@ -146,17 +146,13 @@ class IncomeController extends Controller
         $unpaid = income::groupBy('source_id')
             ->selectRaw('sum(ammount) as sum, source_id')
             ->groupBy('source_id')
-            ->where('paid', 0)
-            ->pluck('sum','source_id');
+            ->where('paid', 0)->get();
 
-        $totals = $unpaid->toArray();
-
-        foreach ($totals as $key => $value) {
-            $source = source::select('name')->orderBy('name')->where('id', $key)->first();
-            $list += [$source->name => $value];
+        foreach ($unpaid as $group) {
+            $list += [$group->sources->first()->name => $group->sum];
         }
 
-        return \View::make('income.unpaid', compact('list')); 
+        return \View::make('income.unpaid', compact('list'));
     }
 
     /**
