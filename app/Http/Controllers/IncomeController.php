@@ -152,7 +152,12 @@ class IncomeController extends Controller
             $list += [$group->sources->first()->name => $group->sum];
         }
 
-        return \View::make('income.unpaid', compact('list'));
+        $incomes = income::where('paid', 0)
+            ->orderBy('year', 'DESC')
+            ->orderBy('month', 'DESC')
+            ->paginate(5);
+
+        return \View::make('income.unpaid', compact('list', 'incomes'));
     }
 
     /**
