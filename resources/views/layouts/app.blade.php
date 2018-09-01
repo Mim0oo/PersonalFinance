@@ -52,6 +52,7 @@
                     <li><a href="{{ url('/income/create') }}">Add new income</a></li>
                     <li><a href="{{ url('/income') }}">View total income</a></li>
                     <li><a href="{{ url('/source') }}">View or Add sources</a></li>
+                    <li><a href="{{ url('/unpaid') }}">View unpaid sources</a></li>
                     </ul>
                     </li>
                     </ul>

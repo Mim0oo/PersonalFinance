@@ -136,6 +136,30 @@ class IncomeController extends Controller
     }
 
     /**
+     * Display unpaid totals by group of sources
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showUnpaid()
+    {
+        $list =[];
+        $unpaid = income::groupBy('source_id')
+            ->selectRaw('sum(ammount) as sum, source_id')
+            ->groupBy('source_id')
+            ->where('paid', 0)
+            ->pluck('sum','source_id');
+
+        $totals = $unpaid->toArray();
+
+        foreach ($totals as $key => $value) {
+            $source = source::select('name')->orderBy('name')->where('id', $key)->first();
+            $list += [$source->name => $value];
+        }
+
+        return \View::make('income.unpaid', compact('list')); 
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
