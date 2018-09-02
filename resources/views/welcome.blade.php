@@ -77,7 +77,7 @@
                 <div class="title m-b-md">
                     Personal finance
                     <p style="font-size:43px;">
-                    version 1.0
+                    version 1.1
                     </p>
                 </div>
                 
@@ -87,7 +87,7 @@
                     <a href="/income">Income View/Add</a>
                     <a href="/source">Sources View/Add</a>
                     <a title="View project at Github" href="https://github.com/Mim0oo/personal_finance">GitHub</a>
-                    <a href="/about">About PF</a>
+                    <a href="/about">About</a>
                 </div>
             </div>
         </div>

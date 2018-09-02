@@ -47,6 +47,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/income') }}">Home</a>
                     <li><a href="javascript:void();" class="dropdown-toggle" data-toggle="dropdown">Income</a>
                     <ul class="dropdown-menu" style="font-size: 14px;">
                     <li><a href="{{ url('/income/create') }}">Add new income</a></li>
