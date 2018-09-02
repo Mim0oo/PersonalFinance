@@ -146,13 +146,16 @@ class IncomeController extends Controller
         $unpaid = income::groupBy('source_id')
             ->selectRaw('sum(ammount) as sum, source_id')
             ->groupBy('source_id')
-            ->where('paid', 0)->get();
+            ->where('paid', 0)
+            ->where('ammount', '!=', 0)
+            ->get();
 
         foreach ($unpaid as $group) {
             $list += [$group->sources->first()->name => $group->sum];
         }
 
         $incomes = income::where('paid', 0)
+            ->where('ammount', '!=', 0)
             ->orderBy('year', 'DESC')
             ->orderBy('month', 'DESC')
             ->paginate(5);
