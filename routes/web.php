@@ -17,7 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Application welcome page
 Route::get('/home', 'HomeController@index');
-Route::resource('income', 'IncomeController');
-Route::resource('source', 'SourceController');
-Route::get('unpaid', 'IncomeController@showUnpaid');
+
+/**
+ * Group Income
+ */
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('income', 'IncomeController');
+	Route::resource('source', 'SourceController');
+	Route::get('unpaid', 'IncomeController@showUnpaid');
+});
