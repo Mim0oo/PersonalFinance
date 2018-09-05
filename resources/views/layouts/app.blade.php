@@ -47,14 +47,13 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/income') }}">Home</a>
+                    <li><a href="{{ url('/income') }}">Dashboard</a>
                     <li><a href="javascript:void();" class="dropdown-toggle" data-toggle="dropdown">Income</a>
                     <ul class="dropdown-menu" style="font-size: 14px;">
                     <li><a href="{{ url('/income/create') }}">Add new income</a></li>
-                    <li><a href="{{ url('/income') }}">View total income</a></li>
-                    <li><a href="{{ url('/source') }}">View or Add sources</a></li>
                     <li><a href="{{ url('/unpaid') }}">View unpaid sources</a></li>
                     </ul>
+                    <li><a href="{{ url('/source') }}">Sources</a>
                     </li>
                     </ul>
 

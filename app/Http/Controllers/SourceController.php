@@ -72,7 +72,10 @@ class SourceController extends Controller
      */
     public function edit($id)
     {
-        //
+        # Grab the source
+        $source = source::find($id);
+
+        return \View::make('source._edit_form', compact('source'));
     }
 
     /**
@@ -84,7 +87,17 @@ class SourceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        # Grab the source
+        $source = source::findOrFail($id);
+        $source->name = $request->name;
+        # Save request
+        $source->save();
+
+        # Display message for successfully database save
+        flash('You have successfully updated source ('.$id.')!', 'success');
+
+        # Return to index view
+        return redirect()->action('SourceController@index');
     }
 
     /**

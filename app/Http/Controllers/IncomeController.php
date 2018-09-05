@@ -178,9 +178,7 @@ class IncomeController extends Controller
         # Grab the income
         $income = income::find($id);
 
-        return \View::make('income._edit_form', compact('income','sources','month','year'
-
-            ));
+        return \View::make('income._edit_form', compact('income','sources','month','year'));
     }
 
     /**
