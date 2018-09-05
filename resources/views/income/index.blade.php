@@ -32,15 +32,17 @@
                     <td>@if($income->paid == 0) No @else Yes @endif</td>
                     <td>
                     {{ Form::open([ 'method'  => 'delete', 'route' => [ 'income.destroy', $income->id ], 'onsubmit' => 'return confirmDelete()']) }}
-                    {{ Form::hidden('id', $income->id) }}
-                    {!! Form::button('<i class="fa fa-window-close" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
+                    {!! Form::button('<i class="fa fa-window-close" aria-hidden="true"></i>', array('type' => 'submit', 'title' => 'Delete', 'class' => 'btn-link')) !!}
                     {{ Form::close() }}</td>
                     <td>
                     {{ Form::open([ 'method'  => 'get', 'route' => [ 'income.edit', $income->id ]]) }}
-                    {{ Form::hidden('id', $income->id) }}
-                    {!! Form::button('<i class="fa fa-pencil-square" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
+                    {!! Form::button('<i class="fa fa-pencil-square" aria-hidden="true"></i>', array('type' => 'submit', 'title' => 'Edit', 'class' => 'btn-link')) !!}
                     {{ Form::close() }}</td>
-                    <td><i class="fa fa-eye" aria-hidden="true" style="font-size:16px;color:green;"></i></td>
+                    <td>
+                    {{ Form::open([ 'method'  => 'get', 'route' => [ 'income.show', $income->id ]]) }}
+                    {!! Form::button('<i class="fa fa-eye" aria-hidden="true" style="font-size:16px;"></i>', array('type' => 'submit', 'title' => 'View', 'class' => 'btn-link')) !!}
+                    {{ Form::close() }}</td>
+                    </td>
                     </tr>
                     @endforeach
                     

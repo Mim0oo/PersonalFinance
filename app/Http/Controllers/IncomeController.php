@@ -132,7 +132,9 @@ class IncomeController extends Controller
      */
     public function show($id)
     {
-    	# show some income
+        # Grab the income
+        $income = income::findOrFail($id);
+        return \View::make('income.view', compact('income'));
     }
 
     /**
