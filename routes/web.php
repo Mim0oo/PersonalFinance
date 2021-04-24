@@ -11,12 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
+Route::get('/', 'HomeController@welcome');
 Route::get('/home', 'HomeController@index');
 Route::resource('income', 'IncomeController');
 Route::resource('source', 'SourceController');
