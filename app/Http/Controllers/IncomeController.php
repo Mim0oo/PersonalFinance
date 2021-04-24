@@ -55,26 +55,6 @@ class IncomeController extends Controller
         # Chart labels are generated in reverse order
         $chart_monthlylabel = array_reverse($chart_monthlylabel);
 
-        # Test xml parsing for foreign currency
-        $xml = \XmlParser::load('http://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
-        $currencies = $xml->getContent()->Cube->Cube->Cube;
-        /*
-        foreach($currencies as $currency) {
-            $item->title = $product['title'];
-            $item->save();
-        }
-        */
-
-        # Test xml parsing for foreign currency BGN
-        $xml2 = \XmlParser::load('http://bnb.bg/Statistics/StExternalSector/StExchangeRates/StERForeignCurrencies/index.htm?download=xml&search=&lang=BG');
-        $currenciesbg = $xml2->getContent()->ROW;
-        /*
-        foreach($currencies as $currency) {
-            $item->title = $product['title'];
-            $item->save();
-        }
-        */
-
         $inc_yearly = DB::table('income')
                      ->select(DB::raw('year'),
                         DB::raw('sum(ammount) as ammount'))
@@ -97,16 +77,14 @@ class IncomeController extends Controller
 
     	return \View::make('income.index', compact(
             'incomes',
-            'sources', 
-            'inc_monthly', 
-            'inc_yearly', 
-            'inc_alltime', 
-            'inc_bysource',
-            'currencies',
-            'currenciesbg'))
-                ->with('months', $chart_monthlylabel)
-                ->with('ammounts', $chart_monthly
-                    ->pluck('ammount')->toArray());
+            'sources',
+            'inc_monthly',
+            'inc_yearly',
+            'inc_alltime',
+            'inc_bysource'))
+            ->with('months', $chart_monthlylabel)
+            ->with('ammounts', $chart_monthly
+            ->pluck('ammount')->toArray());
     }
 
     /**
