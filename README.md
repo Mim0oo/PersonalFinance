@@ -1,13 +1,15 @@
-## About Personal Finance
+![PHP](https://badgen.net/badge/PHP/v7.3/blue) ![Laravel](https://badgen.net/badge/Laravel/6.20.*/pink) ![Mysql](https://badgen.net/badge/Mysql/8.0.*/purple) ![Docker](https://badgen.net/badge/Docker/Supported/blue?icon=docker)
 
-Personal Finance is a CMS App built with the beatiful PHP framework Laravel 5.4. It is an application for managing your personal or team/company income. I personally needed such type of software which can provide us with some more interesting features than a regular excel spreadsheet and this is why I made this. I thought it would be a good idea to share it and be in service to others as well.
+## Personal Finance
+
+Personal Finance is a CMS App built with the beautiful PHP framework Laravel. It is an application for managing your personal or team/company income. I personally needed such type of software which can provide us with some more interesting features than a regular excel spreadsheet and this is why I made this. I thought it would be a good idea to share it and be in service to others as well.
 
 This application will include the following features:
 - Add/Change income sources
 - Add/Change income records
-- Add/Change expense records (in development)
-- Financal analytics (in development), should provide estimated earnings over time.
-- Currency exchange rates (partially done)
+- Add/Change expense records (later)
+- Financal projections/analytics (later)
+- Currency exchange rates (Being revised)
 - *More to come*
 
 ## INSTALLATION
@@ -37,7 +39,7 @@ Project is public and open to any suggestions by volunteers to participate and c
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. If you want to address any problems using the Personal Finance application, please send an e-mail to Martin Georgiev at geeorgiev@gmail.com. All security vulnerabilities or concerns will be promptly addressed.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor[at]laravel.com. If you want to address any problems using the Personal Finance application, please send an e-mail to Martin Georgiev at geeorgiev[at]gmail.com. All security vulnerabilities or concerns will be promptly addressed.
 
 ## License
 
