@@ -19,5 +19,9 @@ Auth::routes();
 
 Route::get('/', 'HomeController@welcome');
 Route::get('/home', 'HomeController@index');
-Route::resource('income', 'IncomeController');
-Route::resource('source', 'SourceController');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('income', 'IncomeController');
+    Route::resource('source', 'SourceController');
+});
+
