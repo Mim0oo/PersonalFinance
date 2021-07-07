@@ -20,7 +20,7 @@ Please, use the below information to setup Personal Finance:
 
 * Clone the repository:
 ```sh
-git clone https://github.com/Mim0oo/personal_finance.git
+git clone https://github.com/Mim0oo/PersonalFinance.git
 ```
 * Configure your **.env** file for your new database.
 
