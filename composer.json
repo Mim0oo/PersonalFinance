@@ -8,7 +8,7 @@
         "php": ">=7.3",
         "laravel/framework": "6.20.*",
         "laravelcollective/html": "^6.2.1",
-        "guzzlehttp/guzzle": "6.2.*",
+        "guzzlehttp/guzzle": "6.5.*",
         "laracasts/flash": "3.2.*",
         "orchestra/parser": "~4.0",
         "laravel/helpers": "~1.4.1"
