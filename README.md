@@ -33,6 +33,14 @@ $ php artisan cache:clear
 
 * make sure you have your virtual host set with mod **Rewrite** on and **AllowOverride All**.
 
+## TODO Clean and update abandoned packages
+Package laravelcollective/html is abandoned, you should avoid using it. Use spatie/laravel-html instead.
+Package swiftmailer/swiftmailer is abandoned, you should avoid using it. Use symfony/mailer instead.
+Package symfony/debug is abandoned, you should avoid using it. Use symfony/error-handler instead.
+Package tightenco/collect is abandoned, you should avoid using it. Use illuminate/collections instead.
+Package fzaninotto/faker is abandoned, you should avoid using it. No replacement was suggested.
+Package phpunit/phpunit-mock-objects is abandoned, you should avoid using it. No replacement was suggested.
+
 ## Contributing
 
 Project is public and open to any suggestions by volunteers to participate and contribute.
