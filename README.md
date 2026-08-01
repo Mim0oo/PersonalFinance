@@ -1,4 +1,4 @@
-![PHP](https://badgen.net/badge/PHP/v7.3/blue) ![Laravel](https://badgen.net/badge/Laravel/6.20.*/pink) ![Mysql](https://badgen.net/badge/Mysql/8.0.*/purple) ![Docker](https://badgen.net/badge/Docker/Supported/blue?icon=docker)
+![PHP](https://badgen.net/badge/PHP/v8.4/blue) ![Laravel](https://badgen.net/badge/Laravel/13.8.*/pink) ![Mysql](https://badgen.net/badge/Mysql/8.4.*/purple) ![Docker](https://badgen.net/badge/Docker/Supported/blue?icon=docker)
 
 ## Personal Finance
 
@@ -33,13 +33,17 @@ $ php artisan cache:clear
 
 * make sure you have your virtual host set with mod **Rewrite** on and **AllowOverride All**.
 
-## TODO Clean and update abandoned packages
-Package laravelcollective/html is abandoned, you should avoid using it. Use spatie/laravel-html instead.
-Package swiftmailer/swiftmailer is abandoned, you should avoid using it. Use symfony/mailer instead.
-Package symfony/debug is abandoned, you should avoid using it. Use symfony/error-handler instead.
-Package tightenco/collect is abandoned, you should avoid using it. Use illuminate/collections instead.
-Package fzaninotto/faker is abandoned, you should avoid using it. No replacement was suggested.
-Package phpunit/phpunit-mock-objects is abandoned, you should avoid using it. No replacement was suggested.
+## Front-end configure and build example [TODO]
+```sh
+mkdir /.npm && chown -R 1000:0 "/.npm" && mkdir /.nvm
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" && \
+    nvm install node && nvm install v16 && nvm use v16
+
+npm install && npm run build
+```
 
 ## Contributing
 
@@ -47,7 +51,7 @@ Project is public and open to any suggestions by volunteers to participate and c
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor[at]laravel.com. If you want to address any problems using the Personal Finance application, please send an e-mail to Martin Georgiev at geeorgiev[at]gmail.com. All security vulnerabilities or concerns will be promptly addressed.
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor[at]laravel.com. If you want to address any problems using the Personal Finance application, please send me a message or a PR. All security vulnerabilities or concerns will be promptly addressed.
 
 ## License
 

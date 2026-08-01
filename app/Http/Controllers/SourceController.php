@@ -47,10 +47,10 @@ class SourceController extends Controller
         $source->save();
 
         # Display message for successfull database save
-        flash('You have successfully added a new income source!', 'success');
+        session()->flash('success', 'You have successfully added a new income source!');
 
         # Return to index view
-        return redirect()->action('SourceController@index');
+        return redirect()->route('source.index');
     }
 
     /**
@@ -99,7 +99,7 @@ class SourceController extends Controller
         source::destroy($id);
 
         # Display message for successfull database save
-        flash('You have successfully deleted source ('.$id.')!', 'success');
+        session()->flash('success', 'You have successfully deleted source ('.$id.')!');
 
     }
 }

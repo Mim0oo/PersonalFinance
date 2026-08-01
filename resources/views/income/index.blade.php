@@ -4,11 +4,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
+        <a class="btn btn-primary pull-right" href="/income/create" role="button">Add income</a>
         <div class="panel-group">
             <div class="panel panel-default">
-            <a class="btn btn-primary pull-right" style="margin-right:30px;margin-top:25px;" href="/income/create" role="button">Add income</a>
                 <div class="panel-heading"><h3>Income grid</h3></div>
-
                 <div class="panel-body">
                   <table class="table table-striped">
                   <tr>
@@ -30,97 +29,29 @@
                     <td>{{$income->sources->first()->name}}</td>
                     <td>{{str_limit($income->comment, $limit = 30, $end = '...')}}</td>
                     <td>@if($income->paid == 0) No @else Yes @endif</td>
-                    <td>
+                    <td style="width: 1em;">
                     {{ Form::open([ 'method'  => 'delete', 'route' => [ 'income.destroy', $income->id ], 'onsubmit' => 'return confirmDelete()']) }}
                     {{ Form::hidden('id', $income->id) }}
                     {!! Form::button('<i class="fa fa-window-close" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
                     {{ Form::close() }}</td>
-                    <td>
+                    <td style="width: 1em;">
                     {{ Form::open([ 'method'  => 'get', 'route' => [ 'income.edit', $income->id ]]) }}
                     {{ Form::hidden('id', $income->id) }}
                     {!! Form::button('<i class="fa fa-pencil-square" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
                     {{ Form::close() }}</td>
-                    <td><i class="fa fa-eye" aria-hidden="true" style="font-size:16px;color:green;"></i></td>
+                    <td style="width: 1em;">
+                    <i class="fa fa-eye" aria-hidden="true" style="font-size:16px;color:green;"></i></td>
                     </tr>
                     @endforeach
-                    
                   </table>
                 <div class="pagination" style="margin:0px;"> {{ $incomes->links() }} </div>
                 </div>
 
-            </div></div></div>
-    
-
-
-<div class="col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading"><h4>Monthly Statistics</h4></div>
-                <div class="panel-body">
-                  <table class="table table-striped">
-                  <tr>
-                  <th>Year</th>
-                  <th>Month</th>
-                  <th>Ammount</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  </tr>
-                    @foreach($inc_monthly as $monthly)
-                    <tr>
-                    <td>{{$monthly->year}}</td>
-                    <td>{{date("F", mktime(0, 0, 0, $monthly->month, 15))}}</td>
-                    <td style="font-weight: bold;">{{$monthly->ammount}}</td>
-                    </tr>
-                    @endforeach
-                    
-                  </table>
-                <div class="pagination" style="margin:0px;"> {{ $inc_monthly->links() }} </div>
-                </div> </div> </div></div>
-<div class="col-md-2">
-            <div class="panel panel-primary">
-                <div class="panel-heading"><h4>Yearly Statistics - Total: {{$inc_alltime[0]->ammount}}</h4></div>
-                <div class="panel-body">
-                <table class="table table-striped">
-                  <tr>
-                  <th>Year</th>
-                  <th>Ammount</th>
-                  </tr>
-                    @foreach($inc_yearly as $yearly)
-                    <tr>
-                    <td>{{$yearly->year}}</td>
-                    <td style="font-weight: bold;">{{$yearly->ammount}}</td>
-                    </tr>
-                    @endforeach
-                  </table>
-                </div></div></div>
-
-<div class="col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading"><h4>Source Statistics</h4></div>
-                <div class="panel-body">
-                <table class="table table-striped">
-                  <tr>
-                  <th>Source</th>
-                  <th>Ammount</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  </tr>
-                    @foreach($inc_bysource as $source)
-                    <tr>
-                    <td>{{$sources->where('id', $source->source_id)->first()->name}}</td>
-                    <td style="font-weight: bold;">{{$source->ammount}}</td>
-                    </tr>
-                    @endforeach
-                  </table>
-                </div>
             </div>
-            </div>
-            <div class="col-md-6">
-            <div class="panel panel-primary">
+          <div class="panel panel-primary">
                 <div class="panel-heading"><h4>Monthly chart</h4></div>
                 <div class="panel-body">
-                  <canvas id="myChart" width="400" height="270"></canvas>
+                  <canvas id="myChart" width="400" height="130%"></canvas>
                   <script>
                     var ctx = document.getElementById("myChart");
                     var myChart = new Chart(ctx, {
@@ -152,6 +83,72 @@
                   </script>
                 </div>
             </div>
-            
+          </div>
+          </div>
+    
+          <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Monthly Statistics</h4></div>
+                <div class="panel-body">
+                  <table class="table table-striped">
+                  <tr>
+                  <th>Year</th>
+                  <th>Month</th>
+                  <th>Ammount</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  </tr>
+                    @foreach($inc_monthly as $monthly)
+                    <tr>
+                    <td>{{$monthly->year}}</td>
+                    <td>{{date("F", mktime(0, 0, 0, $monthly->month, 15))}}</td>
+                    <td style="font-weight: bold;">{{$monthly->ammount}}</td>
+                    </tr>
+                    @endforeach
+                  </table>
+                <div class="pagination" style="margin:0px;"> {{ $inc_monthly->links() }} </div>
+                </div> </div>
+              <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Yearly Statistics - Total: {{$inc_alltime[0]->ammount}}</h4></div>
+                <div class="panel-body">
+                <table class="table table-striped">
+                  <tr>
+                  <th>Year</th>
+                  <th>Ammount</th>
+                  </tr>
+                    @foreach($inc_yearly as $yearly)
+                    <tr>
+                    <td>{{$yearly->year}}</td>
+                    <td style="font-weight: bold;">{{$yearly->ammount}}</td>
+                    </tr>
+                    @endforeach
+                  </table>
+                </div>
+              </div>
+              <div class="panel panel-primary">
+                <div class="panel-heading"><h4>Source Statistics</h4></div>
+                <div class="panel-body">
+                <table class="table table-striped">
+                  <tr>
+                  <th>Source</th>
+                  <th>Ammount</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  </tr>
+                    @foreach($inc_bysource as $source)
+                    <tr>
+                    <td>{{$sources->where('id', $source->source_id)->first()->name}}</td>
+                    <td style="font-weight: bold;">{{$source->ammount}}</td>
+                    </tr>
+                    @endforeach
+                  </table>
+                </div>
+              </div>
             </div>
+          </div>
+            <div class="col-md-8">
+            
+          </div>
 @endsection

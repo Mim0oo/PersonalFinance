@@ -156,10 +156,10 @@ class IncomeController extends Controller
         $income->save();
 
         # Display message for successfully database save
-        flash('You have successfully updated income ('.$id.')!', 'success');
+        session()->flash('success', 'You have successfully updated income ('.$id.')!');
 
         # Return to index view
-        return redirect()->action('IncomeController@index');
+        return redirect()->route('income.index');
     }
 
     /**
@@ -175,10 +175,10 @@ class IncomeController extends Controller
         income::destroy($id);
 
         # Display message for successfull database save
-        flash('You have successfully deleted income ('.$id.')!', 'success');
+        session()->flash('success', 'You have successfully deleted income ('.$id.')!');
 
         # Return to index view
-        return redirect('income');
+        return redirect()->route('income.index');
     }
 
     /**
@@ -218,9 +218,9 @@ class IncomeController extends Controller
         $income->save();
 
         # Display message for successfully database save
-        flash('You have successfully added a new income!', 'success');
+        session()->flash('success', 'You have successfully added a new income!');
 
         # Return to index view
-        return redirect()->action('IncomeController@index');
+        return redirect()->route('income.index');
     }
 }

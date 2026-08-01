@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
 
-                {!! Form::open(['action' => 'SourceController@store']) !!}
+                {!! Form::open(['route' => 'source.store', 'method' => 'POST']) !!}
                  <div class="form-group">
     {!! Form::label('label-name', 'Name') !!}
     {!! Form::text('name',null,array('required', 

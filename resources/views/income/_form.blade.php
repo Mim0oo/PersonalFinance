@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
 
-                    {!! Form::open(['action' => 'IncomeController@store']) !!}
+                {!! Form::open(['route' => 'income.store', 'method' => 'POST']) !!}
 
                     <div class="form-group">
                   {!! Form::Label('label-year', 'Year') !!}

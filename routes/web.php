@@ -1,15 +1,9 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\SourceController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -17,11 +11,10 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@welcome');
-Route::get('/home', 'HomeController@index');
+Route::get('/', [HomeController::class, 'welcome']);
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('income', 'IncomeController');
-    Route::resource('source', 'SourceController');
+    Route::resource('income', IncomeController::class);
+    Route::resource('source', SourceController::class);
 });
-
