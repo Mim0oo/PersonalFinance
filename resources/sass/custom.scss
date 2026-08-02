@@ -24,6 +24,21 @@ font-family: sans-serif, Verdana;
 
 .btn-link .fa {
     font-size: medium;
+    color: #436977;
+}
+.btn-link .fa:hover {
+    color: var(--bs-link-color);
+}
+
+.pagination {
+    --bs-pagination-color: #436977;
+    --bs-pagination-active-bg: #436977;
+    --bs-pagination-active-border-color: #436977;
+}
+
+table .ammount {
+    color: #007010;
+    font-weight: bold;
 }
 
 .toast-header {

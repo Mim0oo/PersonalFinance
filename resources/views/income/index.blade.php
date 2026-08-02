@@ -19,13 +19,12 @@
                   <th>Paid</th>
                   <th></th>
                   <th></th>
-                  <th></th>
                   </tr>
                     @foreach($incomes as $income)
                     <tr @if($income->paid == 0) class="danger" @endif>
                     <td>{{$income->year}}</td>
                     <td>{{date("F", mktime(0, 0, 0, $income->month, 15))}}</td>
-                    <td style="font-weight: bold;">{{$income->ammount}}</td>
+                    <td class="ammount">{{$income->ammount}} <i class="fa fa-arrow-up" aria-hidden="true"></i></td>
                     <td>{{$income->sources->first()->name}}</td>
                     <td>{{str_limit($income->comment, $limit = 30, $end = '...')}}</td>
                     <td>@if($income->paid == 0) No @else Yes @endif</td>
@@ -39,8 +38,6 @@
                     {{ Form::hidden('id', $income->id) }}
                     {!! Form::button('<i class="fa fa-pencil-square" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
                     {{ Form::close() }}</td>
-                    <td style="width: 1em;">
-                    <i class="fa fa-eye" aria-hidden="true" style="font-size:16px;color:green;"></i></td>
                     </tr>
                     @endforeach
                   </table>
@@ -103,7 +100,7 @@
                     <tr>
                     <td>{{$monthly->year}}</td>
                     <td>{{date("F", mktime(0, 0, 0, $monthly->month, 15))}}</td>
-                    <td style="font-weight: bold;">{{$monthly->ammount}}</td>
+                    <td class="ammount">{{$monthly->ammount}}</td>
                     </tr>
                     @endforeach
                   </table>
@@ -120,7 +117,7 @@
                     @foreach($inc_yearly as $yearly)
                     <tr>
                     <td>{{$yearly->year}}</td>
-                    <td style="font-weight: bold;">{{$yearly->ammount}}</td>
+                    <td class="ammount">{{$yearly->ammount}}</td>
                     </tr>
                     @endforeach
                   </table>
@@ -140,7 +137,7 @@
                     @foreach($inc_bysource as $source)
                     <tr>
                     <td>{{$sources->where('id', $source->source_id)->first()->name}}</td>
-                    <td style="font-weight: bold;">{{$source->ammount}}</td>
+                    <td class="ammount">{{$source->ammount}}</td>
                     </tr>
                     @endforeach
                   </table>
