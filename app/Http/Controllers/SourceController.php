@@ -47,7 +47,7 @@ class SourceController extends Controller
         $source->save();
 
         # Display message for successfull database save
-        session()->flash('success', 'You have successfully added a new income source!');
+        session()->flash('success', 'You have successfully added a new income source: '.$source->name.'!');
 
         # Return to index view
         return redirect()->route('source.index');

@@ -28,7 +28,6 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -89,19 +88,43 @@
                 </div>
             </div>
         </nav>
-<!-- TODO Refactor into a proper function -->
-@if (session('error'))
-    <div class="alert alert-error">
+        <!-- TODO Refactor into a proper function -->
+        @if (session('error'))
+            <div class="alert alert-error">
+                <button type="button" class="close" style="border: none;" data-bs-dismiss="alert" role="alert">&times;</button>
+                {!! session('error') !!}
+            </div>
+        @endif
+    @if (session('success'))
+    <div id="alert-nav" class="alert alert-success">
         <button type="button" class="close" style="border: none;" data-bs-dismiss="alert" role="alert">&times;</button>
-        {!! session('error') !!}
+        {!! session('success') !!} 
+        @if (session('result'))
+            Date: {{ session('result')['month'] }}/{{ session('result')['year'] }}
+            @if ( isset(session('result')['ammountOld']) && session('result')['ammountOld'] !== session('result')['ammount'])
+            Amount changed: {{ session('result')['ammountOld'] }} » {{ session('result')['ammount'] }}
+            @else
+            Amount: {{ session('result')['ammount'] }}
+            @endif
+        @endif
     </div>
-@endif
-@if (session('success'))
-    <div class="alert alert-success">
-        <button type="button" class="close" style="border: none;" data-bs-dismiss="alert" role="alert">&times;</button>
-        {!! session('success') !!}
+    <!-- <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button> -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+        <div class="toast-header">
+        <!-- <img src="..." class="rounded me-2" alt="..."> -->
+        <i class="fa fa-exclamation-circle"></i>&nbsp;
+        <strong class="me-auto">Success</strong>
+        <small>Notification</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+        <div class="alert alert-success">
+         {!! session('success') !!}</div>
+        </div>
     </div>
-@endif
+    </div>
+    @endif
         <main class="py-4">
             @yield('content')
         </main>

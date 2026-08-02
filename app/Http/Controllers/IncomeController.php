@@ -147,6 +147,7 @@ class IncomeController extends Controller
 
         $income->month = $request->month;
         $income->year = $request->year;
+        $ammountOld = $income->ammount;
         $income->ammount = $request->ammount;
         $income->comment = $request->comment;
         $income->paid = $request->paid;
@@ -156,10 +157,12 @@ class IncomeController extends Controller
         $income->save();
 
         # Display message for successfully database save
-        session()->flash('success', 'You have successfully updated income ('.$id.')!');
+        session()->flash('success', 'You have successfully updated income! ID:'.$income->id);
 
         # Return to index view
-        return redirect()->route('income.index');
+        return redirect()
+            ->route('income.index')
+            ->with('result', array_add($income->toArray(), 'ammountOld', $ammountOld));
     }
 
     /**
@@ -175,7 +178,7 @@ class IncomeController extends Controller
         income::destroy($id);
 
         # Display message for successfull database save
-        session()->flash('success', 'You have successfully deleted income ('.$id.')!');
+        session()->flash('success', 'You have successfully deleted income ('.$id.') !');
 
         # Return to index view
         return redirect()->route('income.index');
@@ -218,9 +221,11 @@ class IncomeController extends Controller
         $income->save();
 
         # Display message for successfully database save
-        session()->flash('success', 'You have successfully added a new income!');
+        session()->flash('success', 'You have successfully added new income!');
 
         # Return to index view
-        return redirect()->route('income.index');
+        return redirect()
+            ->route('income.index')
+            ->with('result', $income->toArray());
     }
 }

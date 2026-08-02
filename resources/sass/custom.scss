@@ -25,3 +25,26 @@ font-family: sans-serif, Verdana;
 .btn-link .fa {
     font-size: medium;
 }
+
+.toast-header {
+    background-color: #4d645c;
+    color: #fff;
+    border-bottom: var(--bs-toast-border-width) solid #00000091;
+    //border-top-left-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width)) solid #00000091;
+    //border-top-right-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width)) solid #00000091;
+}
+
+.toast-header .btn-close {
+    margin-left: var(--bs-toast-padding-x);
+    margin-right: 0;
+    width: 0.5em;
+    height: 0.5em;
+}
+
+.toast {
+    border-top: var(--bs-toast-border-width) solid #00000091;
+}
+
+.fade {
+  transition: opacity 0.4s ease-out !important;
+}
