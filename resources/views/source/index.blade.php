@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-            <a class="btn btn-primary pull-right" style="margin-right:30px;margin-top:25px;" href="/source/create" role="button">Add source</a>
+            <a class="btn btn-primary pull-right" href="/source/create" role="button">Add source</a>
                 <div class="panel-heading"><h3>Source grid</h3></div>
                 
                 <div class="panel-body">

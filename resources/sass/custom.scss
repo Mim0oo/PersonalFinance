@@ -50,6 +50,11 @@ table .ammount {
     font-weight: bold;
 }
 
+table .ammount-unpaid {
+    color: var(--bs-gray);
+    font-weight: bold;
+}
+
 table tr.red-highlight {
     // border: solid 2px var(--bs-red);
     position: relative;
@@ -62,7 +67,7 @@ table tr.red-highlight {
 }
 
 table tr.red-highlight::after {
-  content: '\f1f8';
+   content: '\f071';
    font-family: FontAwesome;
    font-weight: normal;
    font-style: normal;
