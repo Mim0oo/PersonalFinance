@@ -125,6 +125,27 @@
     </div>
     </div>
     @endif
+    <!-- Modal for delete confirmation -->
+    <div class="modal" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id='modal-body-text' class="modal-body">
+            Do you want to continue DELETE record ID: <span id='modal-body-id'></span> ?
+        </div>
+        {{ Form::open([ 'id' => 'deleteItemForm', 'method'  => 'delete', 'route' => [ 'income.destroy', 0 ]]) }}
+        {{ Form::hidden('id', 0) }}
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </div>
+        </div>
+        {{ Form::close() }}
+    </div>
+    </div>
         <main class="py-4">
             @yield('content')
         </main>

@@ -29,10 +29,14 @@
                     <td>{{str_limit($income->comment, $limit = 30, $end = '...')}}</td>
                     <td>@if($income->paid == 0) No @else Yes @endif</td>
                     <td style="width: 1em;">
-                    {{ Form::open([ 'method'  => 'delete', 'route' => [ 'income.destroy', $income->id ], 'onsubmit' => 'return confirmDelete()']) }}
-                    {{ Form::hidden('id', $income->id) }}
-                    {!! Form::button('<i class="fa fa-window-close" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
-                    {{ Form::close() }}</td>
+                    {!! Form::button('<i class="fa fa-window-close" aria-hidden="true"></i>', 
+                      array(
+                        'type' => 'button',
+                        'class' => 'btn-link',
+                        'data-bs-toggle' => 'modal', 
+                        'data-bs-target' => '#confirmModal',
+                        'data-id' => "$income->id"
+                      )) !!}
                     <td style="width: 1em;">
                     {{ Form::open([ 'method'  => 'get', 'route' => [ 'income.edit', $income->id ]]) }}
                     {{ Form::hidden('id', $income->id) }}
