@@ -23,9 +23,22 @@ window.onload = (event) => {
       // }, 8000);
   }
 }
+document.getElementById('closeModal').addEventListener('click', () => {
+  var elems = document.querySelectorAll(".red-highlight");
+
+  [].forEach.call(elems, function(el) {
+      el.classList.remove("red-highlight");
+  });
+    // Button that triggered the modal
+    // let button = event.relatedTarget;
+    // button.parentNode.parentNode.classList.remove('red-highlight');
+});
+
 document.getElementById('confirmModal').addEventListener('show.bs.modal', function (event) {
     // Button that triggered the modal
     let button = event.relatedTarget;
+
+    button.parentNode.parentNode.classList.add('red-highlight');
     
     // Extract info from data-* attributes
     let itemId = button.getAttribute('data-id');
