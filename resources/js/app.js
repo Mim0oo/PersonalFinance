@@ -4,7 +4,7 @@ window.onload = (event) => {
   const toastTrigger = document.getElementById('liveToastBtn')
   const toastLiveExample = document.getElementById('liveToast')
   const alertNav = document.getElementById('alert-nav')
-  var delayInMilliseconds = 100;
+  var delayInMilliseconds = 0;
 
   if (toastLiveExample) {
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);

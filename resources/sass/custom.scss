@@ -17,6 +17,15 @@ font-family: sans-serif, Verdana;
     justify-content: flex-end;
 }
 
+.form-group {
+    padding-top: 10px;
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-green);
+    border-color: var(--bs-green);
+}
+
 .btn-link {
     border: none;
     background-color: transparent;

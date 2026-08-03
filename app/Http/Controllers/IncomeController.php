@@ -150,7 +150,7 @@ class IncomeController extends Controller
         $ammountOld = $income->ammount;
         $income->ammount = $request->ammount;
         $income->comment = $request->comment;
-        $income->paid = $request->paid;
+        $income->paid = $request->input('paid', 0);
         $income->source_id = $request->source;
 
         # Save request
@@ -214,7 +214,7 @@ class IncomeController extends Controller
 		$income->year = $request->year;
 		$income->ammount = $request->ammount;
 		$income->comment = $request->comment;
-		$income->paid = $request->paid;
+		$income->paid = $request->input('paid', 0);
         $income->source_id = $request->source;
 
         # Save request
