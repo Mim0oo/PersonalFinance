@@ -19,11 +19,16 @@ font-family: sans-serif, Verdana;
 
 .form-group {
     padding-top: 10px;
+    padding-right: 15px;
 }
 
 .form-check-input:checked {
     background-color: var(--bs-green);
     border-color: var(--bs-green);
+}
+
+.form-control {
+    appearance: auto;
 }
 
 .btn-link {
