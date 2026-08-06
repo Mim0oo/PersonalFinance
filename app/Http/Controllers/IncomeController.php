@@ -7,6 +7,7 @@ use App\Models\income;
 use App\Models\source;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class IncomeController extends Controller
 {
@@ -142,16 +143,32 @@ class IncomeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        # Validate the request
+        $validator = Validator::make($request->all(), [
+            'month' => 'required|integer|min:1|max:12',
+            'year' => 'required|integer|min:2009|max:' . (date('Y') + 1),
+            'ammount' => 'required|numeric|min:0',
+            'comment' => 'nullable|string|max:500',
+            'source' => 'required|exists:source,id',
+            'paid' => 'integer|min:0|max:1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
         # Grab the income
         $income = income::find($id);
 
-        $income->month = $request->month;
-        $income->year = $request->year;
+        $income->month = $validated['month'];
+        $income->year = $validated['year'];
         $ammountOld = $income->ammount;
-        $income->ammount = $request->ammount;
-        $income->comment = $request->comment;
-        $income->paid = $request->input('paid', 0);
-        $income->source_id = $request->source;
+        $income->ammount = $validated['ammount'];
+        $income->comment = $validated['comment'];
+        $income->paid = $validated['paid'] ?? 0;
+        $income->source_id = $validated['source'];
 
         # Save request
         $income->save();
@@ -214,13 +231,28 @@ class IncomeController extends Controller
     public function store(Request $request)
     {
     	# Validate the request...
+        $validator = Validator::make($request->all(), [
+            'month' => 'required|integer|min:1|max:12',
+            'year' => 'required|integer|min:2009|max:' . (date('Y') + 1),
+            'ammount' => 'required|numeric|min:0',
+            'comment' => 'nullable|string|max:500',
+            'source' => 'required|exists:source,id',
+            'paid' => 'integer|min:0|max:1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
         $income = new income;
-		$income->month = $request->month;
-		$income->year = $request->year;
-		$income->ammount = $request->ammount;
-		$income->comment = $request->comment;
-		$income->paid = $request->input('paid', 0);
-        $income->source_id = $request->source;
+		$income->month = $validated['month'];
+		$income->year = $validated['year'];
+		$income->ammount = $validated['ammount'];
+		$income->comment = $validated['comment'];
+		$income->paid = $validated['paid'] ?? 0;
+        $income->source_id = $validated['source'];
 
         # Save request
         $income->save();

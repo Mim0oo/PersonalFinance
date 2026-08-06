@@ -13,7 +13,7 @@
                   <tr>
                   <th>Year</th>
                   <th>Month</th>              
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   <th>Source</th>
                   <th>Comment</th>
                   <th>Paid</th>
@@ -104,7 +104,7 @@
                   <tr>
                   <th>Year</th>
                   <th>Month</th>
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   <th></th>
                   <th></th>
                   <th></th>
@@ -125,7 +125,7 @@
                 <table class="table table-striped">
                   <tr>
                   <th>Year</th>
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   </tr>
                     @foreach($inc_yearly as $yearly)
                     <tr>
@@ -142,7 +142,7 @@
                 <table class="table table-striped">
                   <tr>
                   <th>Source</th>
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   <th></th>
                   <th></th>
                   <th></th>

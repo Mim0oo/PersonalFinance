@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\source;
+use Illuminate\Support\Facades\Validator;
 
 class SourceController extends Controller
 {
@@ -39,9 +40,18 @@ class SourceController extends Controller
     public function store(Request $request)
     {
         # Validate the request...
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3,max:255|unique:source,name',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
 
         $source = new source;
-        $source->name = $request->name;
+        $source->name = $validated['name'];
 
         # Save request
         $source->save();
@@ -84,7 +94,23 @@ class SourceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|min:3,max:255|unique:source,name,' . $id,
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
+        $source = source::find($id);
+        $source->name = $validated['name'];
+        $source->save();
+
+        session()->flash('alert', ['success', 'You have successfully updated income source: '.$source->name.'!']);
+
+        return redirect()->route('source.index');
     }
 
     /**

@@ -8,6 +8,17 @@
                 <div class="panel-heading">Edit income ID: {{ $income->id }} ({{ $income->month }}/{{ $income->year }})</div>
                 <div class="panel-body">
                     {{ Form::model($income, array('route' => array('income.update', $income->id), 'method' => 'put')) }}
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" style="border: none;" data-bs-dismiss="alert" role="alert">&times;</button>
+                        <strong>There were some problems:</strong>
+                        <ul style="margin: 5px 0 0 20px; padding-left: 20px;">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
                     <div class="d-flex">
                         <div class="form-group">
                             {!! Form::Label('label-year', 'Year') !!}
