@@ -2,6 +2,8 @@
 
 ## Personal Finance
 
+Version 1.2
+
 Personal Finance is a CMS App built with the beautiful PHP framework Laravel. It is an application for managing your personal or team/company income. I personally needed such type of software which can provide us with some more interesting features than a regular excel spreadsheet and this is why I made this. I thought it would be a good idea to share it and be in service to others as well.
 
 This application will include the following features:
@@ -9,7 +11,7 @@ This application will include the following features:
 - Add/Change income records
 - Add/Change expense records (later)
 - Financal projections/analytics (later)
-- Currency exchange rates (Being revised)
+- Currency exchange rates (will be revised)
 - *More to come*
 
 ## INSTALLATION

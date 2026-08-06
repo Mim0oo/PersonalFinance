@@ -85,7 +85,7 @@
                 <div class="title m-b-md">
                     Personal Finance
                     <p style="font-size:43px;">
-                    version 1.1
+                    version 1.2
                     </p>
                 </div>
                 
