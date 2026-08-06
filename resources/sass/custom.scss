@@ -17,6 +17,20 @@ font-family: sans-serif, Verdana;
     justify-content: flex-end;
 }
 
+.form-group {
+    padding-top: 10px;
+    padding-right: 15px;
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-green);
+    border-color: var(--bs-green);
+}
+
+.form-control {
+    appearance: auto;
+}
+
 .btn-link {
     border: none;
     background-color: transparent;
@@ -41,12 +55,41 @@ table .ammount {
     font-weight: bold;
 }
 
+table .ammount-unpaid {
+    color: var(--bs-gray);
+    font-weight: bold;
+}
+
+table tr.red-highlight {
+    // border: solid 2px var(--bs-red);
+    position: relative;
+    display: inline-table;
+    z-index: 1056;
+    left: 150px;
+    transition: 1s ease-in-out; /* controls the animation when going forward */
+    translate: -150px;
+    // border-left: 5px solid red;
+}
+
+table tr.red-highlight::after {
+   content: '\f071';
+   font-family: FontAwesome;
+   font-weight: normal;
+   font-style: normal;
+   margin:0px 0px 0px 10px;
+   text-decoration:none;
+   color: #ffdc00;
+   font-size: x-large;
+}
+
+.modal { 
+  --bs-modal-zindex: 1057;
+}
+
 .toast-header {
     background-color: #4d645c;
     color: #fff;
     border-bottom: var(--bs-toast-border-width) solid #00000091;
-    //border-top-left-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width)) solid #00000091;
-    //border-top-right-radius: calc(var(--bs-toast-border-radius) - var(--bs-toast-border-width)) solid #00000091;
 }
 
 .toast-header .btn-close {
@@ -61,5 +104,5 @@ table .ammount {
 }
 
 .fade {
-  transition: opacity 0.4s ease-out !important;
+  transition: opacity 0.25s ease-out !important;
 }

@@ -95,16 +95,16 @@
                 {!! session('error') !!}
             </div>
         @endif
-    @if (session('success'))
-    <div id="alert-nav" class="alert alert-success">
+    @if (session('alert'))
+    <div id="alert-nav" class="alert alert-{!! session('alert')[0] !!}">
         <button type="button" class="close" style="border: none;" data-bs-dismiss="alert" role="alert">&times;</button>
-        {!! session('success') !!} 
+        {!! session('alert')[1] !!} 
         @if (session('result'))
             Date: {{ session('result')['month'] }}/{{ session('result')['year'] }}
             @if ( isset(session('result')['ammountOld']) && session('result')['ammountOld'] !== session('result')['ammount'])
-            Amount changed: {{ session('result')['ammountOld'] }} » {{ session('result')['ammount'] }}
+            Amount changed: {{ session('result')['ammountOld'] }} » <b>{{ session('result')['ammount'] }}</b>
             @else
-            Amount: {{ session('result')['ammount'] }}
+            Amount: <b>{{ session('result')['ammount'] }}</b>
             @endif
         @endif
     </div>
@@ -119,12 +119,33 @@
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body">
-        <div class="alert alert-success">
-         {!! session('success') !!}</div>
+        <div class="alert alert-{!! session('alert')[0] !!}">
+         {!! session('alert')[1] !!}</div>
         </div>
     </div>
     </div>
     @endif
+    <!-- Modal for delete confirmation -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id='modal-body-text' class="modal-body">
+            Do you want to continue DELETE record ID: <span id='modal-body-id'></span> ?
+        </div>
+        {{ Form::open([ 'id' => 'deleteItemForm', 'method'  => 'delete', 'route' => [ 'income.destroy', 0 ]]) }}
+        {{ Form::hidden('id', 0) }}
+        <div class="modal-footer">
+            <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </div>
+        </div>
+        {{ Form::close() }}
+    </div>
+    </div>
         <main class="py-4">
             @yield('content')
         </main>

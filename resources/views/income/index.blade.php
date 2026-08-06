@@ -13,7 +13,7 @@
                   <tr>
                   <th>Year</th>
                   <th>Month</th>              
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   <th>Source</th>
                   <th>Comment</th>
                   <th>Paid</th>
@@ -24,19 +24,32 @@
                     <tr @if($income->paid == 0) class="danger" @endif>
                     <td>{{$income->year}}</td>
                     <td>{{date("F", mktime(0, 0, 0, $income->month, 15))}}</td>
-                    <td class="ammount">{{$income->ammount}} <i class="fa fa-arrow-up" aria-hidden="true"></i></td>
+                      @if($income->paid == 1)
+                      <td class="ammount">{{$income->ammount}} <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                      @else
+                      <td class="ammount-unpaid">{{$income->ammount}}
+                      @endif
+                    </td>
                     <td>{{$income->sources->first()->name}}</td>
                     <td>{{str_limit($income->comment, $limit = 30, $end = '...')}}</td>
-                    <td>@if($income->paid == 0) No @else Yes @endif</td>
+                    <td>@if($income->paid == 0)
+                      <i class="fa fa-history" aria-hidden="true" style="color: #d27000;font-size: large;"></i>
+                        @else
+                      <i class="fa fa-check" aria-hidden="true" style="color: green;font-size: large;"></i>
+                        @endif</td>
                     <td style="width: 1em;">
-                    {{ Form::open([ 'method'  => 'delete', 'route' => [ 'income.destroy', $income->id ], 'onsubmit' => 'return confirmDelete()']) }}
-                    {{ Form::hidden('id', $income->id) }}
-                    {!! Form::button('<i class="fa fa-window-close" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
-                    {{ Form::close() }}</td>
+                    {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', 
+                      array(
+                        'type' => 'button',
+                        'class' => 'btn-link',
+                        'data-bs-toggle' => 'modal', 
+                        'data-bs-target' => '#confirmModal',
+                        'data-id' => "$income->id"
+                      )) !!}
                     <td style="width: 1em;">
                     {{ Form::open([ 'method'  => 'get', 'route' => [ 'income.edit', $income->id ]]) }}
                     {{ Form::hidden('id', $income->id) }}
-                    {!! Form::button('<i class="fa fa-pencil-square" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
+                    {!! Form::button('<i class="fa fa-pencil-square-o" aria-hidden="true"></i>', array('type' => 'submit', 'class' => 'btn-link')) !!}
                     {{ Form::close() }}</td>
                     </tr>
                     @endforeach
@@ -91,7 +104,7 @@
                   <tr>
                   <th>Year</th>
                   <th>Month</th>
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   <th></th>
                   <th></th>
                   <th></th>
@@ -112,7 +125,7 @@
                 <table class="table table-striped">
                   <tr>
                   <th>Year</th>
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   </tr>
                     @foreach($inc_yearly as $yearly)
                     <tr>
@@ -129,7 +142,7 @@
                 <table class="table table-striped">
                   <tr>
                   <th>Source</th>
-                  <th>Ammount</th>
+                  <th>Amount</th>
                   <th></th>
                   <th></th>
                   <th></th>

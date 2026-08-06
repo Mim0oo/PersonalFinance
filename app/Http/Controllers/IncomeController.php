@@ -7,6 +7,7 @@ use App\Models\income;
 use App\Models\source;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class IncomeController extends Controller
 {
@@ -142,22 +143,38 @@ class IncomeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        # Validate the request
+        $validator = Validator::make($request->all(), [
+            'month' => 'required|integer|min:1|max:12',
+            'year' => 'required|integer|min:2009|max:' . (date('Y') + 1),
+            'ammount' => 'required|numeric|min:0',
+            'comment' => 'nullable|string|max:500',
+            'source' => 'required|exists:source,id',
+            'paid' => 'integer|min:0|max:1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
         # Grab the income
         $income = income::find($id);
 
-        $income->month = $request->month;
-        $income->year = $request->year;
+        $income->month = $validated['month'];
+        $income->year = $validated['year'];
         $ammountOld = $income->ammount;
-        $income->ammount = $request->ammount;
-        $income->comment = $request->comment;
-        $income->paid = $request->paid;
-        $income->source_id = $request->source;
+        $income->ammount = $validated['ammount'];
+        $income->comment = $validated['comment'];
+        $income->paid = $validated['paid'] ?? 0;
+        $income->source_id = $validated['source'];
 
         # Save request
         $income->save();
 
         # Display message for successfully database save
-        session()->flash('success', 'You have successfully updated income! ID:'.$income->id);
+        session()->flash('alert', ['success', 'You have successfully updated income! ID:'.$income->id]);
 
         # Return to index view
         return redirect()
@@ -178,7 +195,12 @@ class IncomeController extends Controller
         income::destroy($id);
 
         # Display message for successfull database save
-        session()->flash('success', 'You have successfully deleted income ('.$id.') !');
+        session()->flash('alert', [
+            'warning',
+            'You have successfully deleted income! ID: '.$id.' Date: '.
+            $row->month.'/'.$row->year.
+            ' Amount: '.$row->ammount
+        ]);
 
         # Return to index view
         return redirect()->route('income.index');
@@ -209,19 +231,34 @@ class IncomeController extends Controller
     public function store(Request $request)
     {
     	# Validate the request...
+        $validator = Validator::make($request->all(), [
+            'month' => 'required|integer|min:1|max:12',
+            'year' => 'required|integer|min:2009|max:' . (date('Y') + 1),
+            'ammount' => 'required|numeric|min:0',
+            'comment' => 'nullable|string|max:500',
+            'source' => 'required|exists:source,id',
+            'paid' => 'integer|min:0|max:1',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validated = $validator->validated();
+
         $income = new income;
-		$income->month = $request->month;
-		$income->year = $request->year;
-		$income->ammount = $request->ammount;
-		$income->comment = $request->comment;
-		$income->paid = $request->paid;
-        $income->source_id = $request->source;
+		$income->month = $validated['month'];
+		$income->year = $validated['year'];
+		$income->ammount = $validated['ammount'];
+		$income->comment = $validated['comment'];
+		$income->paid = $validated['paid'] ?? 0;
+        $income->source_id = $validated['source'];
 
         # Save request
         $income->save();
 
         # Display message for successfully database save
-        session()->flash('success', 'You have successfully added new income!');
+        session()->flash('alert', ['success', 'You have successfully added new income!']);
 
         # Return to index view
         return redirect()
