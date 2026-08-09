@@ -1,18 +1,28 @@
-![PHP](https://badgen.net/badge/PHP/v8.4/blue) ![Laravel](https://badgen.net/badge/Laravel/13.8.*/pink) ![Mysql](https://badgen.net/badge/Mysql/8.4.*/purple) ![Docker](https://badgen.net/badge/Docker/Supported/blue?icon=docker)
-
-## Personal Finance
-
+# <p align="center">Personal Finance</p>
+<p align="center">
 Version 1.2
+</p>
+<p align="center">
+<a href="README.md"><img src="https://badgen.net/badge/PHP/v8.4/blue" alt="PHP v8.4"></a>
+<a href="README.md"><img src="https://badgen.net/badge/Laravel/13.8.*/pink" alt="Laravel v13.8.*"></a>
+<a href="README.md"><img src="https://badgen.net/static/Bootstrap/5.3/purple" alt="Laravel v13.8.*"></a>
+<a href="README.md"><img src="https://badgen.net/badge/MySQL/8.4.*/purple" alt="Mysql v8.4.*"></a>
+<a href="README.md"><img src="https://badgen.net/badge/Docker/Supported/blue?icon=docker" alt="Docker"></a>
+</p>
 
-Personal Finance is a CMS App built with the beautiful PHP framework Laravel. It is an application for managing your personal or team/company income. I personally needed such type of software which can provide us with some more interesting features than a regular excel spreadsheet and this is why I made this. I thought it would be a good idea to share it and be in service to others as well.
+Personal Finance is a Laravel-powered CMS application designed to make managing personal, team, and company finances simpler and more insightful.
 
-This application will include the following features:
-- Add/Change income sources
-- Add/Change income records
-- Add/Change expense records (later)
-- Financal projections/analytics (later)
-- Currency exchange rates (will be revised)
-- *More to come*
+The project was created out of a personal need for a more capable alternative to traditional spreadsheets. While Excel and similar tools are useful for basic financial tracking, I wanted something purpose-built that could provide a cleaner experience, structured data management, and room for more advanced financial insights. What started as a personal project is now being developed with the goal of making it useful to others as well.
+
+## Features
+
+The application is actively evolving, with the following features planned or in development:
+- Income Sources — Add and manage multiple income sources
+- Income Records — Create, update, and track income transactions
+- Expense Tracking — Manage and categorize expenses (planned)
+- Financial Analytics & Projections — Gain insights into financial trends and future projections (planned)
+- Currency Exchange Rates — Track and work with multiple currencies (under revision)
+- More to come — Additional features and improvements are continuously being considered
 
 ## INSTALLATION
 
